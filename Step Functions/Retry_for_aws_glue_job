@@ -1,0 +1,25 @@
+{
+  "Comment": "This is your state machine",
+  "StartAt": "Glue StartJobRun",
+  "States": {
+    "Glue StartJobRun": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::glue:startJobRun",
+      "Parameters": {
+        "JobName": "aws-demo-simple-glue-test"
+      },
+      "End": true,
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "States.ALL"
+          ],
+          "BackoffRate": 1,
+          "IntervalSeconds": 600,
+          "MaxAttempts": 2,
+          "Comment": "Error Handling"
+        }
+      ]
+    }
+  }
+}
